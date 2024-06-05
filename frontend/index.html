@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu de Casse-Briques</title>
+    <script src="dist/bundle.js" defer></script>
+</head>
+<body>
+<header>
+    <h1>Casse Brique ESGI</h1>
+</header>
+<main>
+    <div class="modals">
+        <div id="endGameModal" style="display: none;">
+            <div>
+                <p>Game Over! Your score: <span id="finalScore"></span></p>
+                <button id="replayButton">Replay</button>
+                <button id="saveScoreButton">Save Score</button>
+            </div>
+        </div>
+
+        <div id="usernameModal" style="display: none;">
+            <div>
+                <label for="username">Enter your username:</label>
+                <input type="text" id="username">
+                <button id="submitScoreButton">Submit</button>
+            </div>
+        </div>
+    </div>
+    <canvas id="gameCanvas" width="560" height="700"></canvas>
+
+    <div id="leaderboard">
+        <h2>Leaderboard</h2>
+        <ol id="scoreList"></ol>
+    </div>
+</main>
+
+
+</body>
+</html>

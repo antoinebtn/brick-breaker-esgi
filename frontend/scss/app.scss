@@ -1,0 +1,57 @@
+$background-color: #1a1a2e;
+$ball-color: #ffcc00;
+$brick-color: #16213e;
+$text-color: #ffffff;
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: $background-color;
+  color: $text-color;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  main {
+    display: flex;
+    flex-direction: row;
+
+    .modals {
+      padding: 2rem;
+
+      #endGameModal, #usernameModal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #1a1a2e;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+      }
+
+      #endGameModal div, #usernameModal div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      button {
+        margin-top: 10px;
+      }
+
+    }
+
+    #leaderboard {
+      padding: 2rem;
+    }
+  }
+}
+
+canvas {
+  display: block;
+  background: $background-color;
+  border: 2px solid $brick-color;
+}

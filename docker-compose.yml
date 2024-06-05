@@ -1,0 +1,51 @@
+version: '3'
+
+volumes:
+  mariadb:
+    driver: local
+
+networks:
+  db:
+    driver: bridge
+
+services:
+  mariadb:
+    image: mariadb:10.6
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: YOUR_ROOT_PASSWORD_HERE
+      MYSQL_USER: YOUR_MYSQL_USER_HERE
+      MYSQL_PASSWORD: YOUR_USER_PW_HERE
+      MYSQL_DATABASE: brick_game
+    ports:
+      - "40000:3306"
+    volumes:
+      - mariadb:/var/lib/mysql
+    networks:
+      - db
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - "40001:80"
+    environment:
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
+    networks:
+      - db
+
+  node-app:
+    build: ./backend/.
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mariadb
+    environment:
+      DB_HOST: mariadb
+      DB_USER: YOUR_MYSQL_USER_HERE
+      DB_PASSWORD: YOUR_USER_PW_HERE
+      DB_NAME: brick_game
+    networks:
+      - db
