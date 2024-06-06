@@ -55,9 +55,7 @@ export class Game {
         }
 
         this.balls.forEach(ball => ball.update());
-
         this.paddle.update();
-
         this.powerUps.forEach(powerUp => powerUp.active && powerUp.update());
 
         this.draw()

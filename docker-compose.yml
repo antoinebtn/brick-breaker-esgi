@@ -1,9 +1,12 @@
 version: '3'
 
 volumes:
-  mariadb:
+  mariadb-data:
     driver: local
-
+    driver_opts:
+      type: none
+      device: ${PWD}/data/mariadb
+      o: bind
 networks:
   db:
     driver: bridge
@@ -20,7 +23,8 @@ services:
     ports:
       - "40000:3306"
     volumes:
-      - mariadb:/var/lib/mysql
+      - mariadb-data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - db
 
@@ -49,3 +53,13 @@ services:
       DB_NAME: brick_game
     networks:
       - db
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    ports:
+      - "8080:3000"
+    networks:
+      - db
+
